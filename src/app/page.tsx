@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
@@ -9,11 +9,32 @@ import { Loader2, Sparkles, Wand2 } from 'lucide-react';
 import { ResumePreview } from '@/components/ResumePreview';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
+const loadingMessages = [
+    'Drafting your resume...',
+    'Designing the layout...',
+    'Incorporating branding...',
+    'Polishing the final details...',
+];
+
 export default function Home() {
   const [resumeData, setResumeData] = useState<{ html: string; css: string } | null>(null);
   const [prompt, setPrompt] = useState('');
   const [isPending, startTransition] = useTransition();
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const { toast } = useToast();
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isPending) {
+      interval = setInterval(() => {
+        setLoadingMessageIndex((prevIndex) => (prevIndex + 1) % loadingMessages.length);
+      }, 2000);
+    }
+    return () => {
+      clearInterval(interval);
+      setLoadingMessageIndex(0);
+    };
+  }, [isPending]);
 
   const handleGenerate = () => {
     if (prompt.trim().length < 10) {
@@ -81,11 +102,16 @@ export default function Home() {
                 <CardFooter>
                     <Button onClick={handleGenerate} disabled={isPending} className="w-full text-base py-6">
                         {isPending ? (
-                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            <>
+                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                                {loadingMessages[loadingMessageIndex]}
+                            </>
                         ) : (
-                            <Sparkles className="mr-2 h-5 w-5" />
+                            <>
+                                <Sparkles className="mr-2 h-5 w-5" />
+                                Generate with AI
+                            </>
                         )}
-                        Generate with AI
                     </Button>
                 </CardFooter>
            </Card>
