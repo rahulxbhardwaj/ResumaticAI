@@ -40,47 +40,28 @@ const prompt = ai.definePrompt({
   name: 'generateResumeTemplatePrompt',
   input: {schema: GenerateResumeTemplateInputSchema},
   output: {schema: GenerateResumeTemplateOutputSchema},
-  prompt: `You are an expert resume template designer. Your task is to generate the complete HTML body content and CSS for a resume based on a user's prompt. The output must be ready to be rendered in a browser.
+  prompt: `You are an expert resume template designer with knowledge of corporate branding. Your task is to generate the complete HTML body content and CSS for a resume based on a user's prompt.
 
-**Instructions:**
-1.  **HTML (design):** Create the full inner HTML for a standard A4-sized resume.
-    *   The HTML should be self-contained within a single top-level div.
-    *   All text elements (names, titles, descriptions, etc.) must be directly editable. Do not wrap them in other elements unnecessarily.
+**CRITICAL INSTRUCTIONS:**
+1.  **Analyze for Company Name:** First, analyze the user's prompt to identify if a specific company is mentioned (e.g., "Google", "Spotify", "Netflix").
+2.  **Research Branding:** If a company is identified, use your knowledge to research its branding.
+    *   **Colors:** Identify the company's primary and secondary brand colors. Incorporate these into the CSS for headings, accents, and links.
+    *   **Logo:** Determine the company's logo. You don't need to embed the actual logo file, but you should design a space for it in the HTML header, perhaps with placeholder text like "[Company Logo]".
+    *   **Style:** Emulate the company's general design aesthetic (e.g., modern, minimalist, playful, corporate).
+3.  **Generate HTML (design):** Create the full inner HTML for a standard A4-sized resume.
+    *   The HTML must be self-contained within a single top-level div.
+    *   All text elements (names, titles, descriptions) must be directly editable.
     *   Use common placeholder text like "John Doe", "Your Address", "Company Name", etc.
-    *   The HTML structure should be semantic and well-organized.
-2.  **CSS (css):** Create the complete CSS for the template.
-    *   The CSS must be self-contained. Do not use @import or link to external stylesheets or fonts. Use common web-safe fonts.
-    *   The CSS should style the HTML to be professional and visually appealing, matching the user's prompt.
-    *   Ensure the layout fits a standard A4 page (210mm x 297mm).
+4.  **Generate CSS (css):** Create the complete CSS for the template.
+    *   The CSS must be self-contained. Do not use @import or link to external stylesheets. Use common web-safe fonts.
+    *   The CSS must professionally style the HTML to fit an A4 page (210mm x 297mm).
+    *   If a company was identified, the color scheme and typography should reflect its branding. If not, create a tasteful, modern design.
 
 **User Prompt:**
 "{{{prompt}}}"
 
-**Example Structure:**
 ---
-**CSS:**
-\`\`\`css
-body { font-family: Arial, sans-serif; }
-.resume-container { padding: 2rem; }
-/* ... more css ... */
-\`\`\`
-
-**Design (HTML):**
-\`\`\`html
-<div>
-  <header>
-    <h1>John Doe</h1>
-    <p>Software Engineer</p>
-  </header>
-  <section>
-    <h2>Experience</h2>
-    <!-- ... more html sections ... -->
-  </section>
-</div>
-\`\`\`
----
-
-Now, generate the CSS and HTML based on the user's prompt above.`,
+Now, generate the CSS and HTML based on the user's prompt and your branding research.`,
 });
 
 const generateResumeTemplateFlow = ai.defineFlow(
