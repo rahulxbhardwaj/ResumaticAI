@@ -102,29 +102,43 @@
 }
 
 @media print {
-  body {
-    background: white;
+  body, html {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    height: 100%;
+    width: 100%;
+    position: static;
+    overflow: visible;
   }
+
   .no-print {
     display: none !important;
   }
+  
   #resume-preview-container {
-    display: block !important;
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
     width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
+    display: block !important;
   }
+
   #resume-preview-content {
-    box-shadow: none !important;
-    margin: 0 !important;
-    border: none !important;
     transform: scale(1) !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
     width: 100% !important;
     height: 100% !important;
+    page-break-after: always;
   }
 }
