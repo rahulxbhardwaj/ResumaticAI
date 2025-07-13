@@ -73,8 +73,8 @@ export default function Home() {
     <main className="min-h-screen w-full bg-background transition-colors duration-300">
       {resumeData ? (
         <ResumePreview 
-          htmlContent={resumeData.html}
-          cssContent={resumeData.css}
+          initialHtmlContent={resumeData.html}
+          initialCssContent={resumeData.css}
           onNewPrompt={handleNewPrompt}
         />
       ) : (
