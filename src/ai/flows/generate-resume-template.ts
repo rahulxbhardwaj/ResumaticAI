@@ -58,6 +58,7 @@ const prompt = ai.definePrompt({
 5.  **Generate CSS (css):** Create the complete CSS for the template.
     *   The CSS must be self-contained. Do not use @import or link to external stylesheets. Use common web-safe fonts.
     *   The CSS must professionally style the HTML to fit an A4 page (210mm x 297mm).
+    *   **Text Legibility:** Ensure that all text has a high contrast ratio against its background color to be easily readable. Text color must be the opposite of its background (e.g., dark text on light backgrounds, light text on dark backgrounds).
     *   The styling must be responsive and clean.
 
 **User Prompt:**
