@@ -69,10 +69,10 @@ export function ResumePreview({ initialHtmlContent, initialCssContent, onNewProm
         <div className="p-4 space-y-6">
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-xl flex items-center gap-2">
+                    <div className="text-xl font-semibold flex items-center gap-2">
                         <Sparkles className="h-5 w-5 text-primary" />
                         Live Resume Editor
-                    </CardTitle>
+                    </div>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
                     <Button variant="outline" onClick={onNewPrompt}>
@@ -88,10 +88,10 @@ export function ResumePreview({ initialHtmlContent, initialCssContent, onNewProm
 
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-xl flex items-center gap-2">
+                    <div className="text-xl font-semibold flex items-center gap-2">
                         <Wand2 className="h-5 w-5 text-primary" />
                         Refine with AI
-                    </CardTitle>
+                    </div>
                 </CardHeader>
                 <CardContent>
                      <Textarea
