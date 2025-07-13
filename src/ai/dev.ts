@@ -3,3 +3,4 @@ config();
 
 import '@/ai/flows/generate-resume-template.ts';
 import '@/ai/flows/summarize-resume-feedback.ts';
+import '@/ai/tools/get-company-logo.ts';
